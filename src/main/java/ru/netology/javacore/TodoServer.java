@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.stream.Collectors;
 
 public class TodoServer {
     private Todos todos;
@@ -38,7 +39,7 @@ public class TodoServer {
                         } else {
                             todos.removeTask(inputData.getTask());
                         }
-                        out.println(todos.getAllTasks());
+                        out.println(todos.getAllTasks().stream().collect(Collectors.joining(" ")));
                     }
                 }
             }

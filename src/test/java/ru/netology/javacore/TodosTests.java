@@ -3,7 +3,9 @@ package ru.netology.javacore;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 public class TodosTests {
 
@@ -14,7 +16,7 @@ public class TodosTests {
 
         todos.addTask(task);
 
-        Assertions.assertEquals(task, todos.getAllTasks().get(0));
+        Assertions.assertEquals(task, todos.getAllTasks().stream().findFirst().get());
     }
 
     @Test
@@ -23,14 +25,14 @@ public class TodosTests {
 
         String task = "Good morning";
         for (int i = 0; i < 7; i++) {
-            todos.addTask(task);
+            todos.addTask(task+i);
         }
 
         todos.addTask(task);
 
         Assertions.assertEquals(7, todos.getAllTasks().size());
     }
-//todo
+
 
     @Test
     public void getAllTasksSorted() {
@@ -42,10 +44,10 @@ public class TodosTests {
         todos.addTask(task1);
         todos.addTask(task);
 
-        List<String> allTasks = todos.getAllTasks();
-
-        Assertions.assertEquals(task, allTasks.get(0));
-        Assertions.assertEquals(task1, allTasks.get(1));
+        Set<String> allTasks = todos.getAllTasks();
+        Iterator<String> iterator = allTasks.iterator();
+        Assertions.assertEquals(task, iterator.next());
+        Assertions.assertEquals(task1, iterator.next());
     }
 
     @Test
